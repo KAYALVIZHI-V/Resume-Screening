@@ -1,0 +1,21 @@
+import { useNavigate } from "react-router-dom";
+
+const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    navigate("/login");
+  };
+
+  return (
+    <nav>
+      <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+      <button onClick={() => navigate("/upload")}>Upload</button>
+      <button onClick={handleLogout}>Logout</button>
+    </nav>
+  );
+};
+
+export default Navbar;
