@@ -30,17 +30,14 @@ exports.calculateMatchScore = async (req, res) => {
     const resumeLower = resumeText.toLowerCase();
     const jobLower = jobDescription.toLowerCase();
 
-    // Skills required by job
     const requiredSkills = skillsList.filter(skill =>
       jobLower.includes(skill)
     );
 
-    // Skills matched in resume
     const matchedSkills = requiredSkills.filter(skill =>
       resumeLower.includes(skill)
     );
 
-    // Missing skills
     const missingSkills = requiredSkills.filter(
       skill => !matchedSkills.includes(skill)
     );
@@ -50,8 +47,8 @@ exports.calculateMatchScore = async (req, res) => {
         ? 0
         : Math.round((matchedSkills.length / requiredSkills.length) * 100);
 
-    // Save result in DB
     const savedResult = await MatchResult.create({
+      user: req.user.id,   // 🔥 VERY IMPORTANT
       resumeText,
       jobDescription,
       matchPercentage,
@@ -73,13 +70,13 @@ exports.calculateMatchScore = async (req, res) => {
   }
 };
 
-
 // ===============================
 // GET: Ranked Candidates
 // ===============================
 exports.getRankedCandidates = async (req, res) => {
   try {
-    const results = await MatchResult.find()
+    const results = await MatchResult.find({ user: req.user.id })
+      .populate("user", "name email")
       .sort({ matchPercentage: -1 });
 
     res.status(200).json({

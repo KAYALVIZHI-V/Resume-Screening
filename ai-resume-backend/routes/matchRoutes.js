@@ -6,15 +6,11 @@ const {
   getRankedCandidates,
 } = require("../controllers/matchController");
 
-const {
-  protect,
-  recruiterOnly,
-} = require("../middleware/authMiddleware");
+const { protect } = require("../middleware/authMiddleware");
 
-// Candidate / Recruiter – must be logged in
+// Logged in users only
 router.post("/score", protect, calculateMatchScore);
-
-// Recruiter only – ranking
 router.get("/ranked", protect, getRankedCandidates);
 
 module.exports = router;
+

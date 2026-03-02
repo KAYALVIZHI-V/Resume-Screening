@@ -34,21 +34,25 @@ function Dashboard() {
         <table width="100%">
           <thead>
             <tr>
+            <th>Name</th>
+            <th>Email</th>
               <th>Match %</th>
               <th>Matched Skills</th>
               <th>Missing Skills</th>
             </tr>
           </thead>
 
-          <tbody>
-            {candidates.map((c, index) => (
-              <tr key={index}>
-                <td>{c.matchPercentage}%</td>
-                <td>{c.matchedSkills?.join(", ")}</td>
-                <td>{c.missingSkills?.join(", ")}</td>
-              </tr>
-            ))}
-          </tbody>
+       <tbody>
+  {candidates.map((c, index) => (
+    <tr key={index}>
+      <td>{c.user?.name}</td>
+      <td>{c.user?.email}</td>
+      <td>{c.matchPercentage}%</td>
+      <td>{c.matchedSkills?.join(", ")}</td>
+      <td>{c.missingSkills?.join(", ")}</td>
+    </tr>
+  ))}
+</tbody>
         </table>
       </div>
     </div>
