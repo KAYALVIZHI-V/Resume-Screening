@@ -1,0 +1,57 @@
+.dashboard-container{
+  padding:30px;
+  background:#f1f5f9;
+  min-height:100vh;
+}
+
+.dashboard-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.profile-box{
+  background:#2563eb;
+  color:white;
+  padding:8px 15px;
+  border-radius:20px;
+}
+
+.upload-btn{
+  background:#22c55e;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+table{
+  width:100%;
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+th{
+  background:#2563eb;
+  color:white;
+  padding:12px;
+}
+
+td{
+  padding:10px;
+  text-align:center;
+}
+
+tr:nth-child(even){
+  background:#f9fafb;
+}

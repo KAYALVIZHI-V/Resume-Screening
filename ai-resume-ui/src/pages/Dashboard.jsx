@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import "../css/Dashboard.css";
 function Dashboard() {
   const [candidates, setCandidates] = useState([]);
-
+  const navigate = useNavigate(); // ✅ YOU FORGOT THIS
+const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
@@ -17,7 +19,8 @@ function Dashboard() {
             },
           }
         );
-          setCandidates(response.data.data);
+
+        setCandidates(response.data.data);
       } catch (error) {
         console.error("Error fetching candidates:", error);
       }
@@ -26,7 +29,7 @@ function Dashboard() {
     fetchCandidates();
   }, []);
 
-  return (
+return (
     <div className="container">
       <div className="card">
         <h2>Candidate Ranking</h2>
@@ -58,5 +61,4 @@ function Dashboard() {
     </div>
   );
 }
-
-export default Dashboard;
+   

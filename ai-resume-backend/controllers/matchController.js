@@ -47,14 +47,14 @@ exports.calculateMatchScore = async (req, res) => {
         ? 0
         : Math.round((matchedSkills.length / requiredSkills.length) * 100);
 
-    const savedResult = await MatchResult.create({
-      user: req.user.id,   // 🔥 VERY IMPORTANT
-      resumeText,
-      jobDescription,
-      matchPercentage,
-      matchedSkills,
-      missingSkills,
-    });
+  const savedResult = await MatchResult.create({
+  user: req.user.id,
+  resumeText,
+  jobDescription,
+  matchPercentage,
+  matchedSkills,
+  missingSkills,
+});
 
     res.status(200).json({
       success: true,
@@ -75,13 +75,20 @@ exports.calculateMatchScore = async (req, res) => {
 // ===============================
 exports.getRankedCandidates = async (req, res) => {
   try {
-    const results = await MatchResult.find({ user: req.user.id })
-      .populate("user", "name email")
-      .sort({ matchPercentage: -1 });
+    let results;
+
+    if (req.user.role === "recruiter") {
+      results = await MatchResult.find()
+        .populate("user", "name email")
+        .sort({ matchPercentage: -1 });
+    } else {
+      results = await MatchResult.find({ user: req.user.id })
+        .populate("user", "name email")
+        .sort({ matchPercentage: -1 });
+    }
 
     res.status(200).json({
       success: true,
-      count: results.length,
       data: results,
     });
 

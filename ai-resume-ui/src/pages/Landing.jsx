@@ -1,20 +1,41 @@
 import { useNavigate } from "react-router-dom";
+import "../css/Landing.css";
 
 function Landing() {
+
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>AI Resume Screening & Job Matching</h1>
-      <p>
-        Upload resumes, analyze job descriptions, and rank candidates using
-        AI-inspired keyword matching.
-      </p>
 
-      <button onClick={() => navigate("/login")}>
-  Start Screening
-</button>
+    <div className="landing-container">
+
+      {/* LEFT SIDE IMAGE */}
+      <div className="landing-left"></div>
+
+      {/* RIGHT SIDE CONTENT */}
+      <div className="landing-right">
+
+        <h1 className="landing-title">
+          AI Resume Screening
+        </h1>
+
+        <p className="landing-text"> 
+          Upload resumes and automatically match candidates
+          with job descriptions using intelligent keyword
+          analysis.
+        </p>
+
+        <button
+          className="start-btn"
+          onClick={() => navigate("/login")}
+        >
+          Start Screening
+        </button>
+
+      </div>
+
     </div>
+
   );
 }
 

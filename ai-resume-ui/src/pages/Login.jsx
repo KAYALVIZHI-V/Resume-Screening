@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "../css/Login.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,8 +29,9 @@ const Login = () => {
   }
 };
 
-  return (
-    <div className="auth-container">
+   return (
+     <div className="login-container">
+      <div className="login-card">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <input
@@ -54,7 +56,10 @@ const Login = () => {
   Don't have an account? <span onClick={() => navigate("/register")}>Register</span>
     </p>
     </div>
+    </div>
   );
+  
+
 };
 
 export default Login;
